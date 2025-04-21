@@ -1,0 +1,14 @@
+{
+  "name": "2-fellow-tracker-final-mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "start": "node index.js",
+    "kickstart": "cd frontend && npm i && npm run build && cd ../server && npm i && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

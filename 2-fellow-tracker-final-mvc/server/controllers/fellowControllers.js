@@ -7,15 +7,15 @@ response back to the client (or an error message).
 */
 
 // Get All (Read)
-const serveFellows = (req, res) => {
-  const fellowsList = Fellow.list();
+const serveFellows = async (req, res) => {
+  const fellowsList = await Fellow.list();
   res.send(fellowsList);
 }
 
 // Get One (Read)
-const serveFellow = (req, res) => {
+const serveFellow = async (req, res) => {
   const { id } = req.params;
-  const fellow = Fellow.find(Number(id));
+  const fellow = await Fellow.find(Number(id));
 
   if (!fellow) {
     return res.status(404).send({
@@ -26,18 +26,18 @@ const serveFellow = (req, res) => {
 };
 
 // Create
-const createFellow = (req, res) => {
+const createFellow = async (req, res) => {
   const { fellowName } = req.body;
   if (!fellowName) {
     return res.status(400).send({ message: "Invalid Name" });
   }
 
-  const newFellow = Fellow.create(fellowName);
+  const newFellow = await Fellow.create(fellowName);
   res.send(newFellow);
 };
 
 // Update
-const updateFellow = (req, res) => {
+const updateFellow = async (req, res) => {
   const { fellowName } = req.body;
 
   if (!fellowName) {
@@ -45,7 +45,7 @@ const updateFellow = (req, res) => {
   }
 
   const { id } = req.params;
-  const updatedFellow = Fellow.editName(Number(id), fellowName);
+  const updatedFellow = await Fellow.editName(Number(id), fellowName);
 
   if (!updatedFellow) {
     return res.status(404).send({
@@ -57,9 +57,9 @@ const updateFellow = (req, res) => {
 }
 
 // Delete
-const deleteFellow = (req, res) => {
+const deleteFellow = async (req, res) => {
   const { id } = req.params;
-  const didDelete = Fellow.delete(Number(id));
+  const didDelete = await Fellow.delete(Number(id));
 
   if (!didDelete) {
     return res.status(404).send({
